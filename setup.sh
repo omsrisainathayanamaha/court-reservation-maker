@@ -1,7 +1,6 @@
 #!/bin/bash
 # To run this script, copy paste the following
-# chmod +x setup.sh
-# ./setup.sh
+# chmod +x setup.sh; ./setup.sh
 # Only run the script if app.py doesn't run.
 # Create a virtual environment (optional but recommended)
 echo "Setting up a virtual environment..."
