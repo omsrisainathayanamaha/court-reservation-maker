@@ -13,7 +13,7 @@ pip install --upgrade pip
 
 # Install required Python packages
 echo "Installing dependencies..."
-pip install Flask pymongo flask_cors
+pip install Flask pymongo flask_cors pyopenssl flask_cors
 
 # Confirm successful installation
 echo "Dependencies installed successfully!"

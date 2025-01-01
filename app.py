@@ -1,9 +1,8 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_cors import CORS
 from pymongo import MongoClient
 
 app = Flask(__name__, static_folder='static')
-CORS(app)  # Enable CORS to handle cross-origin requests
 
 # MongoDB setup
 client = MongoClient("mongodb://localhost:27017/")
@@ -13,8 +12,8 @@ reservations_collection = db.reservations
 
 # Serve the front-end index.html
 @app.route('/')
-def serve_index():
-    return send_from_directory(app.static_folder, 'index.html')
+def index():
+    return render_template('index.html')
 
 # Serve other static files (CSS, JS)
 @app.route('/<path:path>')
@@ -67,4 +66,4 @@ def create_reservation():
     return jsonify(reservation), 201
 
 if __name__ == '__main__':
-    app.run(port=3000, debug=True)
+    app.run(ssl_context='adhoc', debug=True, port=5000)

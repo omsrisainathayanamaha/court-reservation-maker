@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis Court Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .reservation-form, .availability {
+            margin: 20px 0;
+        }
+        
+        label {
+            margin-right: 10px;
+        }
+        
+        input, button {
+            margin: 5px 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Tennis Court Reservation System</h1>
+
+    <div class="reservation-form">
+        <label for="court">Court Number:</label>
+        <input type="number" id="court" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+
+        <label for="time">Time:</label>
+        <input type="time" id="time" required>
+
+        <label for="user">User Name:</label>
+        <input type="text" id="user" required>
+
+        <button onclick="makeReservation()">Reserve</button>
+    </div>
+
+    <div class="availability">
+        <h2>Check Availability</h2>
+        <label for="checkCourt">Court Number:</label>
+        <input type="number" id="checkCourt">
+        <label for="checkDate">Date:</label>
+        <input type="date" id="checkDate">
+        <button onclick="checkAvailability()">Check</button>
+        <ul id="availabilityList"></ul>
+    </div>
+
+    <script>
+
+        async function makeReservation() {
+            const courtNumber = document.getElementById('court').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const user = document.getElementById('user').value;
+        
+            const response = await fetch('/reservations', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ courtNumber, date, time, user })
+            });
+        
+            if (response.ok) {
+                alert('Reservation successful!');
+            } else {
+                const result = await response.json();
+                alert(result.message);
+            }
+        }
+        
+        async function checkAvailability() {
+            const courtNumber = document.getElementById('checkCourt').value;
+            const date = document.getElementById('checkDate').value;
+            const response = await fetch(`/courts/${courtNumber}/availability?date=${date}`);
+        
+            if (response.ok) {
+                const reservations = await response.json();
+                const availabilityList = document.getElementById('availabilityList');
+                availabilityList.innerHTML = '';
+        
+                reservations.forEach(reservation => {
+                    const li = document.createElement('li');
+                    li.textContent = `Time: ${reservation.time} - Reserved by ${reservation.user}`;
+                    availabilityList.appendChild(li);
+                });
+            } else {
+                alert('Error checking availability');
+            }
+        }
+        
+    </script>
+</body>
+</html>
