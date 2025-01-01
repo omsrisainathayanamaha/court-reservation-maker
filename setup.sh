@@ -23,4 +23,4 @@ echo "Please make sure MongoDB is running locally on port 27017."
 echo "To start MongoDB, run: sudo systemctl start mongod (Linux) or brew services start mongodb-community (Mac, if installed via Homebrew)."
 
 # Instructions for starting the Flask application
-echo "To start the Flask server, activate the virtual environment with 'source venv/bin/activate' and run 'python app.py'"
+echo "To start the Flask server, activate the virtual environment with 'source venv/bin/activate' and 

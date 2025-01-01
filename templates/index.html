@@ -28,34 +28,6 @@
     </style>
 </head>
 <body>
-    <h1>Tennis Court Reservation System</h1>
-
-    <div class="reservation-form">
-        <label for="court">Court Number:</label>
-        <input type="number" id="court" required>
-
-        <label for="date">Date:</label>
-        <input type="date" id="date" required>
-
-        <label for="time">Time:</label>
-        <input type="time" id="time" required>
-
-        <label for="user">User Name:</label>
-        <input type="text" id="user" required>
-
-        <button onclick="makeReservation()">Reserve</button>
-    </div>
-
-    <div class="availability">
-        <h2>Check Availability</h2>
-        <label for="checkCourt">Court Number:</label>
-        <input type="number" id="checkCourt">
-        <label for="checkDate">Date:</label>
-        <input type="date" id="checkDate">
-        <button onclick="checkAvailability()">Check</button>
-        <ul id="availabilityList"></ul>
-    </div>
-
     <script>
 
         async function makeReservation() {
@@ -63,7 +35,7 @@
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
             const user = document.getElementById('user').value;
-        
+            alert("Sending!");
             const response = await fetch('/reservations', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -99,5 +71,34 @@
         }
         
     </script>
+    <h1>Tennis Court Reservation System</h1>
+
+    <div class="reservation-form">
+        <label for="court">Court Number:</label>
+        <input type="number" id="court" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+
+        <label for="time">Time:</label>
+        <input type="time" id="time" required>
+
+        <label for="user">User Name:</label>
+        <input type="text" id="user" required>
+
+        <button onclick="makeReservation()">Reserve</button>
+    </div>
+
+    <div class="availability">
+        <h2>Check Availability</h2>
+        <label for="checkCourt">Court Number:</label>
+        <input type="number" id="checkCourt">
+        <label for="checkDate">Date:</label>
+        <input type="date" id="checkDate">
+        <button onclick="checkAvailability()">Check</button>
+        <ul id="availabilityList"></ul>
+    </div>
+
+
 </body>
 </html>
